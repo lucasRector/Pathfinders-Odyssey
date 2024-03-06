@@ -1,5 +1,5 @@
-# Add Your Project Name Here
-# Add Your Team Name Here
+# PathFinder's Odyssey
+# Umbreon
 
 Team Members
 * Member 1
