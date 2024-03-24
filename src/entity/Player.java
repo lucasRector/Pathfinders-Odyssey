@@ -4,16 +4,13 @@ package src.entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+
 
 import src.main.GamePanel;
 import src.main.KeyHandler;
 
 public class Player extends Entity {
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX;
@@ -23,7 +20,7 @@ public class Player extends Entity {
 
 
     public Player(GamePanel gp, KeyHandler keyH){
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -50,28 +47,25 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage(){
-        try {
-            File boyup1 = new File("res/player/boyup1.png");
-            up1 = ImageIO.read(boyup1);
-            File boyup2 = new File("res/player/boyup2.png");
-            up2 = ImageIO.read(boyup2);
-            File boydown1 = new File("res/player/boydown1.png");
-            down1 = ImageIO.read(boydown1);
-            File boydown2 = new File("res/player/boydown2.png");
-            down2 = ImageIO.read(boydown2);
-            File boyleft1 = new File("res/player/boyleft1.png");
-            left1 = ImageIO.read(boyleft1);
-            File boyleft2 = new File("res/player/boyleft2.png");
-            left2 = ImageIO.read(boyleft2);
-            File boyright1 = new File("res/player/boyright1.png");
-            right1 = ImageIO.read(boyright1);
-            File boyright2 = new File("res/player/boyright2.png");
-            right2 = ImageIO.read(boyright2);
+      
+            up1 = setup("res/player/boyup1");
+            
+            up2 = setup("res/player/boyup2");
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            down1 = setup("res/player/boydown1");
+
+            down2 = setup("res/player/boydown2");
+
+            left1 = setup("res/player/boyleft1");
+
+            left2 = setup("res/player/boyleft2");
+
+            right1 = setup("res/player/boyright1");
+
+            right2 = setup("res/player/boyright2");
     }
+
+
 
     public void update(){
         if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true){
@@ -98,6 +92,8 @@ public class Player extends Entity {
             int objIndex = gp.cChecker.checkObject(this, true);
             pickupObject(objIndex);
 
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
             if(collisionOn == false){
                 switch (direction) {
                     case "up":
@@ -160,7 +156,7 @@ public class Player extends Entity {
                     break;
                 case "Boots":
                 gp.ui.showMessage("Speed Up!!!");
-                    gp.playSE(i);
+                    gp.playSE(2);
                     speed += 2;
                     gp.obj[i] = null;
                         break;
@@ -173,6 +169,17 @@ public class Player extends Entity {
                
             }
         }
+    }
+
+    public void interactNPC(int i){
+        if(i != 999){
+            if(gp.keyH.enterPressed == true){
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
+            }
+
+        }
+        gp.keyH.enterPressed = false;
     }
 
     public void draw(Graphics2D g2){
@@ -213,7 +220,7 @@ public class Player extends Entity {
             break;
 
         }
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 
 
