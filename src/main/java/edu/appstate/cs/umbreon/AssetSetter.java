@@ -1,10 +1,10 @@
-package src.main;
+package edu.appstate.cs.umbreon;
 
-import src.entity.NPC_OldMan;
-import src.object.OBJ_Boots;
-import src.object.OBJ_Chest;
-import src.object.OBJ_Door;
-import src.object.OBJ_Key;
+// import src.entity.NPC_OldMan;
+// import src.object.OBJ_Boots;
+// import src.object.OBJ_Chest;
+// import src.object.OBJ_Door;
+// import src.object.OBJ_Key;
 
 public class AssetSetter {
     GamePanel gp;

@@ -1,4 +1,4 @@
-package src.main;
+package edu.appstate.cs.umbreon;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,10 +7,10 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
-import src.entity.Entity;
-import src.entity.Player;
-import src.object.SuperObject;
-import src.tile.TileManager;
+// import src.entity.Entity;
+// import src.entity.Player;
+// import src.object.SuperObject;
+// import src.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     //Screen Settings

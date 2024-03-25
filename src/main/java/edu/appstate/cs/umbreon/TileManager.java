@@ -1,4 +1,4 @@
-package src.tile;
+package edu.appstate.cs.umbreon;
 //Imports
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -7,8 +7,8 @@ import java.io.FileReader;
 
 import javax.imageio.ImageIO;
 
-import src.main.GamePanel;
-import src.main.UtilityTool;
+// import src.main.GamePanel;
+// import src.main.UtilityTool;
 
 /**
  * Manages tiles in the game world.

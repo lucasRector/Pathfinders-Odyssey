@@ -1,11 +1,11 @@
-package src.object;
+package edu.appstate.cs.umbreon;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import src.main.GamePanel;
-import src.main.UtilityTool;
+// import src.main.GamePanel;
+// import src.main.UtilityTool;
 
 /**
  * Represents a superclass for all objects in the game.

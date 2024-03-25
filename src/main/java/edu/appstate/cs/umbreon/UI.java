@@ -1,4 +1,4 @@
-package src.main;
+package edu.appstate.cs.umbreon;
 
 
 
@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
-import src.object.OBJ_Key;
+// import src.object.OBJ_Key;
 
 public class UI {
     GamePanel gp;

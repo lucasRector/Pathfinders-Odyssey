@@ -1,4 +1,4 @@
-package src.main;
+package edu.appstate.cs.umbreon;
 
 import javax.sound.sampled.*;
 import java.net.URL;

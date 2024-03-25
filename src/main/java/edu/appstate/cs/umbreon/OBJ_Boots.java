@@ -1,11 +1,11 @@
-package src.object;
+package edu.appstate.cs.umbreon;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import src.main.GamePanel;
+// import src.main.GamePanel;
 
 /**
  * Represents a pair of boots object in the game.

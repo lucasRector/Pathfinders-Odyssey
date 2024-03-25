@@ -1,4 +1,4 @@
-package src.entity;
+package edu.appstate.cs.umbreon;
 
 
 import java.awt.Graphics2D;
@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 
 
-import src.main.GamePanel;
-import src.main.KeyHandler;
+// import src.main.GamePanel;
+// import src.main.KeyHandler;
 
 public class Player extends Entity {
     KeyHandler keyH;
