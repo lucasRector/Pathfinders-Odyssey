@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
 
 import javax.swing.JFrame;
 

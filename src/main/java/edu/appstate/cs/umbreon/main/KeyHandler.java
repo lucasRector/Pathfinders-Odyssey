@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

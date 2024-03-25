@@ -1,8 +1,11 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.object;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import edu.appstate.cs.umbreon.main.UtilityTool;
+import edu.appstate.cs.umbreon.main.GamePanel;
 
 // import src.main.GamePanel;
 // import src.main.UtilityTool;

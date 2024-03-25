@@ -1,8 +1,9 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.entity;
 
 import java.util.Random;
 
-// import src.main.GamePanel;
+import edu.appstate.cs.umbreon.main.GamePanel;
+
 
 /**
  * Represents an NPC entity in the game.

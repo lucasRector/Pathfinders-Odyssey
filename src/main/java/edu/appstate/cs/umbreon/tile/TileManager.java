@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.tile;
 //Imports
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileReader;
 
 import javax.imageio.ImageIO;
+
+import edu.appstate.cs.umbreon.main.UtilityTool;
+import edu.appstate.cs.umbreon.main.GamePanel;
 
 // import src.main.GamePanel;
 // import src.main.UtilityTool;

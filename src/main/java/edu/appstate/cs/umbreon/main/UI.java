@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
 
 
 
@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
+
+import edu.appstate.cs.umbreon.object.OBJ_Key;
 
 // import src.object.OBJ_Key;
 

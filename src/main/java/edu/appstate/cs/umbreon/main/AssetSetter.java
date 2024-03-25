@@ -1,4 +1,10 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
+
+import edu.appstate.cs.umbreon.entity.NPC_OldMan;
+import edu.appstate.cs.umbreon.object.OBJ_Boots;
+import edu.appstate.cs.umbreon.object.OBJ_Chest;
+import edu.appstate.cs.umbreon.object.OBJ_Door;
+import edu.appstate.cs.umbreon.object.OBJ_Key;
 
 // import src.entity.NPC_OldMan;
 // import src.object.OBJ_Boots;

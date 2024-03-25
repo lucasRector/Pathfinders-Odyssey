@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.tile;
 
 import java.awt.image.BufferedImage;
 

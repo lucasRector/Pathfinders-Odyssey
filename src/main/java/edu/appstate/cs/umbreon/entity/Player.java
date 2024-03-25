@@ -1,9 +1,12 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.entity;
 
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import edu.appstate.cs.umbreon.main.GamePanel;
+import edu.appstate.cs.umbreon.main.KeyHandler;
 
 
 

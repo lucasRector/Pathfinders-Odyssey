@@ -1,6 +1,6 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
 
-// import src.entity.Entity;
+import edu.appstate.cs.umbreon.entity.Entity;
 
 public class CollisionChecker {
     

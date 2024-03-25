@@ -1,4 +1,4 @@
-package edu.appstate.cs.umbreon;
+package edu.appstate.cs.umbreon.main;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,6 +6,11 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
+
+import edu.appstate.cs.umbreon.entity.Player;
+import edu.appstate.cs.umbreon.entity.Entity;
+import edu.appstate.cs.umbreon.object.SuperObject;
+import edu.appstate.cs.umbreon.tile.TileManager;
 
 // import src.entity.Entity;
 // import src.entity.Player;
