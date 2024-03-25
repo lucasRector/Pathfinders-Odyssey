@@ -6,9 +6,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import edu.appstate.cs.umbreon.main.UtilityTool;
 import edu.appstate.cs.umbreon.main.GamePanel;
-
+import edu.appstate.cs.umbreon.main.UtilityTool;
 
 public class Entity {
 
