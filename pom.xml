@@ -4,12 +4,12 @@
 
   <groupId>edu.appstate.cs</groupId>
   <!-- TODO: Update the project name. This should all be 1 word. -->
-  <artifactId>YourProjectName</artifactId>
+  <artifactId>umbreon</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <!-- TODO: Update the project name. This can be multiple words. -->
-  <name>Your Project Name</name>
+  <name>umbreon</name>
   <url>http://maven.apache.org</url>
 
   <properties>
