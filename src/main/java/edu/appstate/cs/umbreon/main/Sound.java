@@ -1,14 +1,16 @@
 package edu.appstate.cs.umbreon.main;
 
 import javax.sound.sampled.*;
-import java.net.URL;
+
+import java.io.File;
+//import java.net.URL;
 
 /**
  * Manages sound effects in the game.
  */
 public class Sound {
     Clip clip; // The sound clip
-    URL soundURL[] = new URL[30]; // Array to hold URLs of sound files
+    File soundURL[] = new File[30]; // Array to hold URLs of sound files
     long clipTimePosition = 0; // Variable to store current position of the clip
 
     /**
@@ -16,11 +18,11 @@ public class Sound {
      * Initializes URLs for sound files.
      */
     public Sound() {
-        soundURL[0] = getClass().getClassLoader().getResource("res/sound/Pathfinder’s Odyssey.wav");
-        soundURL[1] = getClass().getClassLoader().getResource("res/sound/coin.wav");
-        soundURL[2] = getClass().getClassLoader().getResource("res/sound/powerup.wav");
-        soundURL[3] = getClass().getClassLoader().getResource("res/sound/unlock.wav");
-        soundURL[4] = getClass().getClassLoader().getResource("res/sound/fanfare.wav");
+        soundURL[0] = new File(Main.BUILDDIR + "sound/Pathfinder's Odyssey.wav");
+        soundURL[1] = new File(Main.BUILDDIR + "sound/coin.wav");
+        soundURL[2] = new File(Main.BUILDDIR + "sound/powerup.wav");
+        soundURL[3] = new File(Main.BUILDDIR + "sound/unlock.wav");
+        soundURL[4] = new File(Main.BUILDDIR + "sound/fanfare.wav");
     }
 
     /**

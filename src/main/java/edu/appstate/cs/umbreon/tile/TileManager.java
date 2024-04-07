@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import edu.appstate.cs.umbreon.main.UtilityTool;
 import edu.appstate.cs.umbreon.main.GamePanel;
+import edu.appstate.cs.umbreon.main.Main;
 
 // import src.main.GamePanel;
 // import src.main.UtilityTool;
@@ -30,7 +31,7 @@ public class TileManager {
         this.gp = gp;
         tile = new Tile[50]; // Initialize tile array with a size of 50
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow]; // Initialize mapTileNum array with dimensions from GamePanel
-        loadMap("res/maps/worldV2.txt"); // Load map from file
+        loadMap(Main.BUILDDIR + "maps/worldV2.txt"); // Load map from file
         getTileImage(); // Load tile images
     }
 
@@ -89,7 +90,7 @@ public class TileManager {
         UtilityTool uTool = new UtilityTool(); // Utility tool for scaling images
         try {
             tile[index] = new Tile(); // Create new Tile object
-            File file = new File("res/tiles/" + imagePath + ".png"); // Get file for tile image
+            File file = new File(Main.BUILDDIR + "tiles/" + imagePath + ".png"); // Get file for tile image
             tile[index].image = ImageIO.read(file); // Read image file
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); // Scale image
             tile[index].collision = collision; // Set collision status for the tile

@@ -3,6 +3,7 @@ package edu.appstate.cs.umbreon.entity;
 import java.util.Random;
 
 import edu.appstate.cs.umbreon.main.GamePanel;
+import edu.appstate.cs.umbreon.main.Main;
 
 
 /**
@@ -29,14 +30,14 @@ public class NPC_OldMan extends Entity {
      */
     public void getImage() {
         // Load images for different directions of movement
-        up1 = setup("res/npc/oldman_up_1");
-        up2 = setup("res/npc/oldman_up_2");
-        down1 = setup("res/npc/oldman_down_1");
-        down2 = setup("res/npc/oldman_down_2");
-        left1 = setup("res/npc/oldman_left_1");
-        left2 = setup("res/npc/oldman_left_2");
-        right1 = setup("res/npc/oldman_right_1");
-        right2 = setup("res/npc/oldman_right_2");
+        up1 = setup(Main.BUILDDIR + "npc/oldman_up_1");
+        up2 = setup(Main.BUILDDIR + "npc/oldman_up_2");
+        down1 = setup(Main.BUILDDIR + "npc/oldman_down_1");
+        down2 = setup(Main.BUILDDIR + "npc/oldman_down_2");
+        left1 = setup(Main.BUILDDIR + "npc/oldman_left_1");
+        left2 = setup(Main.BUILDDIR + "npc/oldman_left_2");
+        right1 = setup(Main.BUILDDIR + "npc/oldman_right_1");
+        right2 = setup(Main.BUILDDIR + "npc/oldman_right_2");
     }
 
     /**

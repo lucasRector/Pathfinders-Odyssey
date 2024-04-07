@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import edu.appstate.cs.umbreon.main.GamePanel;
 import edu.appstate.cs.umbreon.main.KeyHandler;
+import edu.appstate.cs.umbreon.main.Main;
 
 
 
@@ -51,21 +52,21 @@ public class Player extends Entity {
 
     public void getPlayerImage(){
       
-            up1 = setup("res/player/boyup1");
+            up1 = setup(Main.BUILDDIR + "player/boyup1");
             
-            up2 = setup("res/player/boyup2");
+            up2 = setup(Main.BUILDDIR + "player/boyup2");
 
-            down1 = setup("res/player/boydown1");
+            down1 = setup(Main.BUILDDIR + "player/boydown1");
 
-            down2 = setup("res/player/boydown2");
+            down2 = setup(Main.BUILDDIR + "player/boydown2");
 
-            left1 = setup("res/player/boyleft1");
+            left1 = setup(Main.BUILDDIR + "player/boyleft1");
 
-            left2 = setup("res/player/boyleft2");
+            left2 = setup(Main.BUILDDIR + "player/boyleft2");
 
-            right1 = setup("res/player/boyright1");
+            right1 = setup(Main.BUILDDIR + "player/boyright1");
 
-            right2 = setup("res/player/boyright2");
+            right2 = setup(Main.BUILDDIR + "player/boyright2");
     }
 
 

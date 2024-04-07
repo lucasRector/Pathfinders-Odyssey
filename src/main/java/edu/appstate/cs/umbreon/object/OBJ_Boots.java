@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import edu.appstate.cs.umbreon.main.GamePanel;
+import edu.appstate.cs.umbreon.main.Main;
 
 
 /**
@@ -23,8 +24,9 @@ public class OBJ_Boots extends SuperObject {
     public OBJ_Boots(GamePanel gp) {
         this.gp = gp;
         name = "Boots"; // Set the name of the object
+        System.out.println("Boots?: " + Main.BUILDDIR + "objects/boots.png");
         try {
-            File bootsFile = new File("res/objects/boots.png"); // Load the boots image file
+            File bootsFile = new File(Main.BUILDDIR + "objects/boots.png"); // Load the boots image file
             image = ImageIO.read(bootsFile); // Read the image
             // Scale the image to the tile size
             uTool.scaleImage(image, gp.tileSize, gp.tileSize);

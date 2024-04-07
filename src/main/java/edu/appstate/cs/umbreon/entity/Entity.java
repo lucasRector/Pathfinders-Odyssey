@@ -3,6 +3,7 @@ package edu.appstate.cs.umbreon.entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.imageio.ImageIO;
 
@@ -34,8 +35,10 @@ public class Entity {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
+        File file = new File(imagePath + ".png");
         try {
-            image = ImageIO.read(getClass().getClassLoader().getResource(imagePath + ".png"));
+            System.out.println("Image Path!: " + imagePath + ".png");
+            image = ImageIO.read(file); //ImageIO.read(getClass().getClassLoader().getResource(imagePath + ".png"));
             image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 
 

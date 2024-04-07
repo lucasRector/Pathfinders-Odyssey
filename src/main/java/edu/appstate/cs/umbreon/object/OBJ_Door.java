@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import edu.appstate.cs.umbreon.main.GamePanel;
+import edu.appstate.cs.umbreon.main.Main;
 
 // import src.main.GamePanel;
 
@@ -25,7 +26,7 @@ public class OBJ_Door extends SuperObject {
         this.gp = gp;
         name = "Door"; // Set the name of the object
         try {
-            File doorFile = new File("res/objects/door.png"); // Load the door image file
+            File doorFile = new File(Main.BUILDDIR + "objects/door.png"); // Load the door image file
             image = ImageIO.read(doorFile); // Read the image
             // Scale the image to the tile size
             uTool.scaleImage(image, gp.tileSize, gp.tileSize);
