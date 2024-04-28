@@ -1,7 +1,5 @@
 package edu.appstate.cs.umbreon.main;
 
-
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,6 +23,7 @@ public class UI {
     DecimalFormat dFormat = new DecimalFormat("#0.00");
     Graphics2D g2;
     public String currentDialogue = "";
+    public int commandNum = 0;
 
     // Add a boolean flag to control whether the game is paused
     private boolean isPaused = false;
@@ -44,8 +43,13 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-    
+
         this.g2 = g2;
+
+        // Ttitle Screen
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
 
         if (gameFinished == true) {
             g2.setFont(font_40);
@@ -57,13 +61,13 @@ public class UI {
             int y;
 
             text = "You found the treasure!";
-            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = gp.screenWidth / 2 - textLength / 2;
             y = gp.screenHeight / 2 - gp.tileSize * 3;
             g2.drawString(text, x, y);
 
             text = "Your time was: " + dFormat.format(playTime) + "!";
-            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = gp.screenWidth / 2 - textLength / 2;
             y = gp.screenHeight / 2 + gp.tileSize * 4;
             g2.drawString(text, x, y);
@@ -71,11 +75,10 @@ public class UI {
             g2.setFont(font_80B);
             g2.setColor(Color.yellow);
             text = "Congratulations!";
-            textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            textLength = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
             x = gp.screenWidth / 2 - textLength / 2;
             y = ((gp.screenHeight / 2) + 25) + gp.tileSize * 2;
             g2.drawString(text, x, y);
-
 
             gp.gameThread = null;
         } else {
@@ -101,15 +104,15 @@ public class UI {
             if (messageOn == true) {
                 g2.setFont(g2.getFont().deriveFont(30F));
                 g2.drawString(message, gp.tileSize / 2, gp.tileSize * 6);
-                messageCounter ++;
+                messageCounter++;
 
-                if (messageCounter > 80){
+                if (messageCounter > 80) {
                     messageCounter = 0;
                     messageOn = false;
                 }
             }
         }
-        if (gp.gameState == gp.dialogueState){
+        if (gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
             isPaused = false;
         }
@@ -126,12 +129,12 @@ public class UI {
     }
 
     public int getXForCenteredText(String text, Graphics2D g2) {
-        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth / 2 - length / 2;
         return x;
     }
 
-    public void drawDialogueScreen(){
+    public void drawDialogueScreen() {
         int x = 0;
         int y = gp.tileSize / 2;
         int width = gp.screenWidth;
@@ -142,14 +145,14 @@ public class UI {
         x += gp.tileSize;
         y += gp.tileSize;
 
-        for (String line : currentDialogue.split("\n")){
+        for (String line : currentDialogue.split("\n")) {
             g2.drawString(line, x, y);
             y += 40;
 
         }
     }
 
-    public void drawSubWindow(int x, int y, int width, int height){
+    public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0, 0, 0); // add 4th number for opacity
         g2.setColor(c);
         g2.fillRoundRect(x, y, width, height, 35, 35);
@@ -160,6 +163,55 @@ public class UI {
         g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
     }
 
+    public void drawTitleScreen() {
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // Title Screen
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        String text = "PathFinder's Odyssey";
+        int x = getXForCenteredText(text, g2);
+        int y = gp.tileSize * 3;
+
+        // Shadow
+        g2.setColor(Color.gray);
+        g2.drawString(text, x + 5, y + 5);
+        // Main Color
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+
+        // Boy Image
+
+        x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+        y = gp.tileSize * 2;
+        g2.drawImage(gp.player.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
+
+        // Menu
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+        text = "New Game";
+        x = getXForCenteredText(text, g2);
+        y += gp.tileSize * 3.5;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - gp.tileSize, y); // can use drawImage for an image instead
+        }
+
+        text = "Load Game";
+        x = getXForCenteredText(text, g2);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - gp.tileSize, y); // can use drawImage for an image instead
+        }
+
+        text = "Quit";
+        x = getXForCenteredText(text, g2);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x - gp.tileSize, y); // can use drawImage for an image instead
+        }
+
+    }
+
 }
-
-

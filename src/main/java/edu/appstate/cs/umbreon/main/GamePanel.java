@@ -18,7 +18,7 @@ import edu.appstate.cs.umbreon.tile.TileManager;
 // import src.tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
-    //Screen Settings
+    // Screen Settings
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
     public final int tileSize = originalTileSize * scale; // 48x48 tile size
@@ -32,8 +32,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
-
-
     int FPS = 60;
 
     TileManager tileM = new TileManager(this);
@@ -45,15 +43,15 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10]; 
+    public SuperObject obj[] = new SuperObject[10];
     public Entity npc[] = new Entity[10];
     public int gameState;
+    public final int titleState = 0; // Title Scrren Included
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
 
-
-    public GamePanel(){
+    public GamePanel() {
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -61,15 +59,15 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
-    public void setupGame(){
+    public void setupGame() {
         aSetter.setNPC();
         aSetter.setObject();
         playMusic(0);
-        gameState = playState;
+        gameState = titleState;
 
     }
 
-    public void startGameThread(){
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
 
@@ -77,87 +75,95 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS;
+        double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-         while(gameThread != null){
+        while (gameThread != null) {
 
             update();
             repaint();
 
-            try{
+            try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000;
-                if(remainingTime < 0){
+                remainingTime = remainingTime / 1000000;
+                if (remainingTime < 0) {
                     remainingTime = 0;
                 }
                 Thread.sleep((long) remainingTime);
                 nextDrawTime += drawInterval;
-            } catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-         }
-       
+        }
+
     }
 
-    public void update(){
-        if(gameState == playState){
-            if(gameThread == null){
+    public void update() {
+        if (gameState == playState) {
+            if (gameThread == null) {
                 music.stop();
             }
             music.resume();
-            
+
             player.update();
             for (int i = 0; i < npc.length; i++) {
-                if(npc[i] != null){
+                if (npc[i] != null) {
                     npc[i].update();
                 }
             }
         }
-        if(gameState == pauseState){
+        if (gameState == pauseState) {
             music.pause();
-            //nothing
+            // nothing
 
         }
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-        tileM.draw(g2);
+        Graphics2D g2 = (Graphics2D) g;
 
-        for(int i = 0; i < obj.length; i++){
-            if(obj[i] != null){
-                obj[i].draw(g2, this);
-            }
+        // TITLE SCREEN
+
+        if (gameState == titleState) {
+            ui.draw(g2);
         }
+        // Other
+        else {
+            tileM.draw(g2);
 
-        for (int i = 0; i < npc.length; i++) {
-            if (npc[i] != null) {
-                npc[i].draw(g2);
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] != null) {
+                    obj[i].draw(g2, this);
+                }
             }
+
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    npc[i].draw(g2);
+                }
+            }
+
+            player.draw(g2);
+
+            ui.draw(g2);
+
+            g2.dispose();
         }
-
-        player.draw(g2);
-
-        ui.draw(g2);
-        
-
-        g2.dispose();
     }
 
-    public void playMusic(int i){
+    public void playMusic(int i) {
         music.setFile(i);
         music.play();
         music.loop();
     }
 
-    public void stopMusic(){
+    public void stopMusic() {
         music.stop();
     }
 
-    public void playSE(int i){
+    public void playSE(int i) {
         se.setFile(i);
         se.play();
     }
