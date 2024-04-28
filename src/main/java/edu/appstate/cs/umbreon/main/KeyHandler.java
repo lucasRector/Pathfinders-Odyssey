@@ -37,7 +37,7 @@ public class KeyHandler implements KeyListener {
             if (code == KeyEvent.VK_ENTER) {
                 if (gp.ui.commandNum == 0) {
                     gp.gameState = gp.playState;
-                    // gp.playMusic(0); Could be turn on for double music
+                    gp.playMusic(0); // Could be turn on for double music
                 }
                 if (gp.ui.commandNum == 1) {
                     // possible save state

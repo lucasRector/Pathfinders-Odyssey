@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
     public final int tileSize = originalTileSize * scale; // 48x48 tile size
-    public final int maxScreenCol = 16; // can change later
-    public final int maxScreenRow = 12; // can change later
+    public final int maxScreenCol = 40; // can change later
+    public final int maxScreenRow = 22; // can change later
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     public SuperObject obj[] = new SuperObject[10];
     public Entity npc[] = new Entity[10];
     public int gameState;
-    public final int titleState = 0; // Title Scrren Included
+    public final int titleState = 0; // Title Screen Included
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -62,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         aSetter.setNPC();
         aSetter.setObject();
-        playMusic(0);
+        // playMusic(0);
         gameState = titleState;
 
     }

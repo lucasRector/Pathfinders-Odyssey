@@ -164,12 +164,12 @@ public class UI {
     }
 
     public void drawTitleScreen() {
-        g2.setColor(new Color(0, 0, 0));
+        g2.setColor(new Color(70, 120, 80));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         // Title Screen
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-        String text = "PathFinder's Odyssey";
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
+        String text = "Pathfinder's Odyssey";
         int x = getXForCenteredText(text, g2);
         int y = gp.tileSize * 3;
 
@@ -183,7 +183,7 @@ public class UI {
         // Boy Image
 
         x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
-        y = gp.tileSize * 2;
+        y = gp.tileSize * 4;
         g2.drawImage(gp.player.down1, x, y, gp.tileSize * 2, gp.tileSize * 2, null);
 
         // Menu
