@@ -1,15 +1,17 @@
 package edu.appstate.cs.umbreon.tile;
 //Imports
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
 import edu.appstate.cs.umbreon.main.UtilityTool;
+import edu.appstate.cs.umbreon.tile.mapgen.MapGen;
 import edu.appstate.cs.umbreon.main.GamePanel;
 import edu.appstate.cs.umbreon.main.Main;
+
+
 
 // import src.main.GamePanel;
 // import src.main.UtilityTool;
@@ -18,34 +20,41 @@ import edu.appstate.cs.umbreon.main.Main;
  * Manages tiles in the game world.
  */
 public class TileManager {
+    MapGen mg;
     GamePanel gp; // Reference to the game panel
     public Tile[] tile; // Array to hold tile objects
     public int mapTileNum[][]; // Array to hold tile numbers for the map
-
+    public HashMap<String, Integer> nameMap;
+ 
     /**
      * Constructor for TileManager class.
      * 
      * @param gp The GamePanel instance.
      */
     public TileManager(GamePanel gp) {
+        
+        this.nameMap = new HashMap<String, Integer>();
+        this.mg = new MapGen(gp);
         this.gp = gp;
         tile = new Tile[50]; // Initialize tile array with a size of 50
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow]; // Initialize mapTileNum array with dimensions from GamePanel
+        getTileImage();
         loadMap(Main.BUILDDIR + "maps/worldV2.txt"); // Load map from file
-        getTileImage(); // Load tile images
+         // Load tile images
     }
 
     /**
      * Loads the images for each tile type.
      */
     public void getTileImage() {
-        // Placeholder to ensure double digit map creation
+        //  Placeholder to ensure double digit map creation
         for (int i = 0; i < 10; i++) {
             setup(i, "grass00", false); // Set up placeholder tiles
         }
+        
 
         // Set up various tile types (grass, water, road, earth, wall, tree)
-        setup(10, "grass00", false);
+        
         setup(11, "grass01", false);
         setup(12, "water00", true);
         setup(13, "water01", true);
@@ -63,10 +72,10 @@ public class TileManager {
         setup(25, "water13", true);
         setup(26, "road00", false);
         setup(27, "road01", false);
-        setup(28, "road02", false);
+        setup(28, "road02", false); // down
         setup(29, "road03", false);
-        setup(30, "road04", false);
-        setup(31, "road05", false);
+        setup(30, "road04", false); // right
+        setup(31, "road05", false); // left
         setup(32, "road06", false);
         setup(33, "road07", false);
         setup(34, "road08", false);
@@ -77,6 +86,7 @@ public class TileManager {
         setup(39, "earth", false);
         setup(40, "wall", true);
         setup(41, "tree", true);
+        
     }
 
     /**
@@ -94,10 +104,15 @@ public class TileManager {
             tile[index].image = ImageIO.read(file); // Read image file
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize); // Scale image
             tile[index].collision = collision; // Set collision status for the tile
+            nameMap.put(imagePath, index);
         } catch (Exception e) {
             e.printStackTrace(); // Print error if image loading fails
         }
+
     }
+
+
+
 
     /**
      * Loads the map layout from a text file.
@@ -105,31 +120,10 @@ public class TileManager {
      * @param filePath The path to the map file.
      */
     public void loadMap(String filePath) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath)); // Create reader for map file
-
-            int col = 0;
-            int row = 0;
-
-            // Read map data line by line
-            while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-                String line = br.readLine(); // Read a line from the file
-                while (col < gp.maxWorldCol) {
-                    String numbers[] = line.split(" "); // Split line into numbers
-                    int num = Integer.parseInt(numbers[col]); // Parse tile number
-                    mapTileNum[col][row] = num; // Store tile number in array
-                    col++;
-                }
-                if (col == gp.maxWorldCol) {
-                    col = 0;
-                    row++;
-                }
-            }
-            br.close(); // Close file reader
-        } catch (Exception e) {
-            e.printStackTrace(); // Print error if map loading fails
+        mg.generate(mapTileNum);
+  
         }
-    }
+    
 
     /**
      * Draws the tiles onto the graphics context.

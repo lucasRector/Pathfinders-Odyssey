@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public final int maxWorldCol = 108;
+    public final int maxWorldRow = 108;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     int FPS = 60;
 
-    TileManager tileM = new TileManager(this);
+    TileManager tileM;
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -45,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10]; 
+    public SuperObject obj[] = new SuperObject[100]; 
     public Entity npc[] = new Entity[10];
     public int gameState;
     public final int playState = 1;
@@ -54,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public GamePanel(){
+        tileM = new TileManager(this);
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
