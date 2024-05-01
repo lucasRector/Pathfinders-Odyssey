@@ -98,8 +98,8 @@ public class MapGen {
     public void makePath(int cellX, int cellY, String direction, int forkLimit){
         float turnChanceIncrease = 6 / 100f; // 3%
         int maxIterations = 36;
-        float forkChance = 3 / 100f; // 2%
-        float objectChance = 5 / 100f; //1%
+        float forkChance = 4 / 100f; // 2%
+        float objectChance = 7 / 100f; //1%
         
         int prevX = cellX, prevY = cellY;
         
