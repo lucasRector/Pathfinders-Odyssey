@@ -41,15 +41,16 @@ public class MapGen {
       }
       //this is relfected acroos y=x
       int[][] startingArea = {
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26},
-        { 26, 26, 26, 26, 26, 26, 26}
+        {41, 41, 41},
+        { 40, 42, 42, 42, 42, 42, 42,},
+        { 40, 40, 40, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42},
+        { 42, 42, 42, 42, 42, 42, 42}
       };
 
       int forkLimit = 6; 
@@ -73,7 +74,7 @@ public class MapGen {
       copyBlock(tiles, startingArea, gp.maxWorldCol / 2 - 3, gp.maxWorldRow / 2 - 3);
       
       if (objects.size() > 0) {
-        System.err.println("WARNING: DIDNT PLACE EVERY OBJECT. RAISE OBJECT CHANCE");
+        System.err.println("WARNING: DID NOT PLACE EVERY OBJECT. RAISE OBJECT CHANCE");
       }
     }
 
@@ -96,10 +97,10 @@ public class MapGen {
     }
 
     public void makePath(int cellX, int cellY, String direction, int forkLimit){
-        float turnChanceIncrease = 6 / 100f; // 3%
-        int maxIterations = 36;
-        float forkChance = 4 / 100f; // 2%
-        float objectChance = 7 / 100f; //1%
+        float turnChanceIncrease = 6 / 100f; // 6%
+        int maxIterations = 37;
+        float forkChance = 5 / 100f; // 5%
+        float objectChance = 5 / 100f; //5%
         
         int prevX = cellX, prevY = cellY;
         
