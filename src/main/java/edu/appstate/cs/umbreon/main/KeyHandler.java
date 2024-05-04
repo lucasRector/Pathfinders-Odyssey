@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean instructionsScreenDisplayed = false;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -34,19 +35,16 @@ public class KeyHandler implements KeyListener {
                     gp.ui.commandNum = 0;
                 }
             }
-            if (code == KeyEvent.VK_ENTER) {
-                if (gp.ui.commandNum == 0) {
-                    gp.gameState = gp.playState;
-                    gp.playMusic(0); // Could be turn on for double music
-                }
-                if (gp.ui.commandNum == 1) {
-                    // possible save state
-                }
-                if (gp.ui.commandNum == 2) {
-                    System.exit(0);
-                }
-            }
 
+        }
+
+        // ran into a bug where you cannot return to the title screen
+        // if (instructionsScreenDisplayed && code != KeyEvent.VK_ENTER) {
+        //    return;
+        // } 
+        if (instructionsScreenDisplayed && code == KeyEvent.VK_ENTER) {
+            gp.ui.showInstructions = false;
+            instructionsScreenDisplayed = false;
         }
 
         if (gp.gameState == gp.playState) {
@@ -94,9 +92,33 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    public void handleTitleMenuSelection(int code) {
+        if (code == KeyEvent.VK_ENTER) {
+            if (gp.ui.commandNum == 0) {
+                // Start a new game
+                gp.gameState = gp.playState;
+                gp.playMusic(0);
+            } else if (gp.ui.commandNum == 1) {
+                // Show instructions
+                gp.ui.showInstructions = !gp.ui.showInstructions;
+                instructionsScreenDisplayed = gp.ui.showInstructions;
+            } else if (gp.ui.commandNum == 2) {
+                // Quit the game
+                System.exit(0);
+            }
+        }
+    }
+
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
+
+        // To access the instructions screen
+        if (instructionsScreenDisplayed && code == KeyEvent.VK_ENTER) {
+            gp.ui.showInstructions = false;
+            instructionsScreenDisplayed = false;
+        }
+
         if (code == KeyEvent.VK_W) {
             upPressed = false;
         }
@@ -113,6 +135,37 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
 
-    }
+        
+        if (gp.gameState == gp.titleState) {
+            if (gp.ui.showInstructions && code == KeyEvent.VK_ENTER) {
+                gp.ui.showInstructions = false;
+            }
+        } else if (gp.gameState == gp.playState) {
+            if (code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
+            }
+        } else if (gp.gameState == gp.pauseState) {
+            if (code == KeyEvent.VK_P) {
+                gp.gameState = gp.playState;
+            }
+        } else if (gp.gameState == gp.dialogueState) {
+            if (code == KeyEvent.VK_ENTER) {
+                gp.gameState = gp.playState;
+            }
+        }
 
+        // This stops the user from navigating the title screen by accident 
+        // while reading the instuctions
+        if (gp.gameState == gp.titleState) {
+            if (gp.keyH.upPressed == true || gp.keyH.downPressed == true) {
+                gp.keyH.upPressed = false;
+                gp.keyH.downPressed = false;
+                gp.ui.commandNum += (gp.keyH.downPressed) ? 1 : -1;
+                gp.ui.commandNum = (gp.ui.commandNum < 0) ? 2 : (gp.ui.commandNum > 2) ? 0 : gp.ui.commandNum;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                handleTitleMenuSelection(code);
+            }
+        }
+    }
 }

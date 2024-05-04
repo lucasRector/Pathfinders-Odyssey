@@ -24,6 +24,7 @@ public class UI {
     Graphics2D g2;
     public String currentDialogue = "";
     public int commandNum = 0;
+    public boolean showInstructions = false;
 
     // Add a boolean flag to control whether the game is paused
     private boolean isPaused = false;
@@ -116,6 +117,13 @@ public class UI {
             drawDialogueScreen();
             isPaused = false;
         }
+
+        if (gp.gameState == gp.titleState) {
+            drawTitleScreen();
+            if (showInstructions) {
+                drawInstructionsScreen();
+            }
+        }
     }
 
     public void drawPauseScreen(Graphics2D g2) {
@@ -196,12 +204,13 @@ public class UI {
             g2.drawString(">", x - gp.tileSize, y); // can use drawImage for an image instead
         }
 
-        text = "Load Game";
+        // Instructions
+        text = "Instructions";
         x = getXForCenteredText(text, g2);
         y += gp.tileSize;
         g2.drawString(text, x, y);
         if (commandNum == 1) {
-            g2.drawString(">", x - gp.tileSize, y); // can use drawImage for an image instead
+            g2.drawString(">", x - gp.tileSize, y);
         }
 
         text = "Quit";
@@ -214,4 +223,31 @@ public class UI {
 
     }
 
+    // Instructions Screen
+    public void drawInstructionsScreen() {
+        int x = gp.tileSize;
+        int y = gp.tileSize / 2;
+        int width = gp.screenWidth - (gp.tileSize * 2);
+        int height = gp.screenHeight - (gp.tileSize * 2);
+        drawSubWindow(x, y, width, height);
+    
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28));
+        x += gp.tileSize;
+        y += gp.tileSize;
+    
+        // Add instructions here, splitting them into lines
+        String instructions = "To play the game you must navigate through " 
+            + "the maze and collect all the keys."
+            + "\nOnce you have found all the keys, find the building "
+            + "\nand unlock the door to find the treasure."
+            + "\n\nUse 'wasd' to move and press 'enter' when next to an npc to talk to them"
+            + "\nPress 'p' to pause the game";
+        for (String line : instructions.split("\n")) {
+            g2.drawString(line, x, y);
+            y += 40;
+        }
+    
+        // button to go back to the title screen
+        g2.drawString("Press Enter to return to title screen", x, y + 40);
+    }
 }
