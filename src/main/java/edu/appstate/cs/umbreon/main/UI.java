@@ -86,7 +86,7 @@ public class UI {
             g2.setFont(font_40);
             g2.setColor(Color.white);
             g2.drawImage(keyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
-            g2.drawString("= " + gp.player.hasKey, 74, 70);
+            g2.drawString("= " + gp.player.hasKey + " / 10", 74, 70);
 
             // Check if the game is paused
             if (!isPaused) {

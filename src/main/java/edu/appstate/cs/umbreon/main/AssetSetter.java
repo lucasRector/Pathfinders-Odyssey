@@ -21,24 +21,20 @@ public class AssetSetter {
 
     public void setObject(){
 
-        //gp.obj[5] = new OBJ_Door(gp);
-       // gp.obj[5].worldX = 12 * gp.tileSize;
-        //gp.obj[5].worldY = 23 * gp.tileSize;
+        gp.obj[5] = new OBJ_Door(gp);
+        gp.obj[5].worldX = 52 * gp.tileSize;
+        gp.obj[5].worldY = 53 * gp.tileSize;
     
-       // gp.obj[6] = new OBJ_Chest(gp);
-        //gp.obj[6].worldX = 10 * gp.tileSize;
-        //gp.obj[6].worldY = 8 * gp.tileSize;
-    
-        //gp.obj[7] = new OBJ_Boots(gp);
-        //gp.obj[7].worldX = 37 * gp.tileSize;
-        //gp.obj[7].worldY = 43 * gp.tileSize;
+       gp.obj[6] = new OBJ_Chest(gp);
+       gp.obj[6].worldX = 52 * gp.tileSize;
+       gp.obj[6].worldY = 52 * gp.tileSize;
             
     }
 
     public void setNPC(){
         gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.tileSize * 21;
-        gp.npc[0].worldY = gp.tileSize * 21;
+        gp.npc[0].worldX = gp.tileSize * 52;
+        gp.npc[0].worldY = gp.tileSize * 57;
     }
 
 

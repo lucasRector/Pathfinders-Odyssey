@@ -44,9 +44,9 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues(){
-        worldX = gp.worldWidth/2; 
+        worldX = (gp.worldWidth/2) ; 
         worldY =  gp.worldHeight/2;
-        speed = 10;
+        speed = 7;
         direction = "down";
     }
 
@@ -147,14 +147,17 @@ public class Player extends Entity {
                     gp.ui.showMessage("You got a key:)");
                     break;
                 case "Door":
-                    if(hasKey > 0){
+                    if(hasKey == 10){
                         gp.playSE(3);
                         gp.obj[i] = null;
                         hasKey--;
                         gp.ui.showMessage("You opened the door");
                     }
                     else{
-                        gp.ui.showMessage("You need a key:(");
+                        if(gp.player.hasKey == 1){
+                            gp.ui.showMessage("You need " + keyMath() + " more key:(");
+                        }else
+                        gp.ui.showMessage("You need " + keyMath() +  " more keys:(");
 
                     }
                     break;
@@ -173,6 +176,11 @@ public class Player extends Entity {
                
             }
         }
+    }
+
+    public int keyMath(){
+       return 10 - gp.player.hasKey;
+
     }
 
     public void interactNPC(int i){
