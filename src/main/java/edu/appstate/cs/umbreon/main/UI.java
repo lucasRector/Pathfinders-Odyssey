@@ -93,7 +93,7 @@ public class UI {
                 playTime += (double) 1 / 60;
             }
 
-            g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 11, 65);
+            g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 35, 65);
 
             if (gp.gameState == gp.pauseState) {
                 drawPauseScreen(g2);
@@ -123,6 +123,7 @@ public class UI {
             if (showInstructions) {
                 drawInstructionsScreen();
             }
+            isPaused = true;
         }
     }
 
@@ -230,23 +231,23 @@ public class UI {
         int width = gp.screenWidth - (gp.tileSize * 2);
         int height = gp.screenHeight - (gp.tileSize * 2);
         drawSubWindow(x, y, width, height);
-    
+
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28));
         x += gp.tileSize;
         y += gp.tileSize;
-    
+
         // Add instructions here, splitting them into lines
-        String instructions = "To play the game you must navigate through " 
-            + "the maze and collect all the keys."
-            + "\nOnce you have found all the keys, find the building "
-            + "\nand unlock the door to find the treasure."
-            + "\n\nUse 'wasd' to move and press 'enter' when next to an npc to talk to them"
-            + "\nPress 'p' to pause the game";
+        String instructions = "To play the game you must navigate through "
+                + "the maze and collect all the keys."
+                + "\nOnce you have found all the keys, find the building "
+                + "\nand unlock the door to find the treasure."
+                + "\n\nUse 'wasd' to move and press 'enter' when next to an npc to talk to them"
+                + "\nPress 'p' to pause the game";
         for (String line : instructions.split("\n")) {
             g2.drawString(line, x, y);
             y += 40;
         }
-    
+
         // button to go back to the title screen
         g2.drawString("Press Enter to return to title screen", x, y + 40);
     }

@@ -12,9 +12,10 @@ public class Main {
      * @param args Command-line arguments (not used).
      */
     public static String BUILDDIR = "./target/classes/";
+
     public static void main(String[] dargs) {
-        //System.out.println("Other Dir: " + System.getProperty("outputDirectory"));
-        //System.out.println("User dir: " + System.getProperty("user.dir"));
+        // System.out.println("Other Dir: " + System.getProperty("outputDirectory"));
+        // System.out.println("User dir: " + System.getProperty("user.dir"));
         // Create a new JFrame window
         JFrame window = new JFrame();
         // Set the default close operation to exit on close

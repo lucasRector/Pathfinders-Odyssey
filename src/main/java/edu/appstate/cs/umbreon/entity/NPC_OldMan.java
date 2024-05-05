@@ -5,13 +5,12 @@ import java.util.Random;
 import edu.appstate.cs.umbreon.main.GamePanel;
 import edu.appstate.cs.umbreon.main.Main;
 
-
 /**
  * Represents an NPC entity in the game.
  * This class specifically represents an old man NPC.
  */
 public class NPC_OldMan extends Entity {
-    
+
     /**
      * Constructs an NPC_OldMan object.
      * 
@@ -65,18 +64,15 @@ public class NPC_OldMan extends Entity {
         }
     }
 
-    public void setDialogue(){
-        dialogues[0] = "Hello! Welcome to Lil Saint John \nIsland";
-        dialogues[1] = "Fill Some Story line here";
-        dialogues[2] = "Fill Some Story line here";
-        dialogues[3] = "Fill Some Story line here";
+    public void setDialogue() {
+        dialogues[0] = "Hello! Welcome to Lil Saint John Island, its a place of twists and turns that changes everytime a newcomer like yourself comes along!";
+        dialogues[1] = "I have been tasked by the Great Ones above to inform you, new Pathfinder, to take on this journey.";
+        dialogues[2] = "The goal is very simple, go along a short journey to find the keys and claim this treasure hidden inside of the castle";
+        dialogues[3] = "Be wary, every journey is not like another and it is up to you to see how it is completed!";
 
-    
-    
     }
 
-
-    public void speak(){
+    public void speak() {
         super.speak();
     }
 }
