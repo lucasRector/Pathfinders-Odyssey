@@ -148,26 +148,44 @@ public class TileManager {
                 worldRow++;
             }
         }
+
+        // Open water around Island
         for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
-            for (worldRow = -margin; worldRow < 0; worldRow++) {
+            for (worldRow = -margin; worldRow < -1; worldRow++) {
                 drawOneTile(g2, worldCol, worldRow, tile[12]);
             }
         }
         for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
-            for (worldRow = gp.maxWorldRow; worldRow < gp.maxWorldRow + margin; worldRow++) {
+            for (worldRow = gp.maxWorldRow + 1; worldRow < gp.maxWorldRow + margin; worldRow++) {
                 drawOneTile(g2, worldCol, worldRow, tile[12]);
             }
         }
-        for (worldCol = -margin; worldCol < 0; worldCol++) {
-            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+        for (worldCol = -margin; worldCol < -1; worldCol++) {
+            for (worldRow = -1; worldRow < gp.maxWorldRow + 1; worldRow++) {
                 drawOneTile(g2, worldCol, worldRow, tile[12]);
             }
         }
-        for (worldCol = gp.maxWorldRow; worldCol < gp.maxWorldRow + margin; worldCol++) {
-            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+        for (worldCol = gp.maxWorldRow + 1; worldCol < gp.maxWorldRow + margin; worldCol++) {
+            for (worldRow = -1; worldRow < gp.maxWorldRow + 1; worldRow++) {
                 drawOneTile(g2, worldCol, worldRow, tile[12]);
             }
         }
+        // Edges of island
+        for (worldCol = 0; worldCol < gp.maxWorldCol; worldCol++)
+        {
+            drawOneTile(g2, worldCol, -1, tile[20]);
+            drawOneTile(g2, worldCol, gp.maxWorldRow, tile[15]);
+        }
+        for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++)
+        {
+            drawOneTile(g2, -1, worldRow, tile[18]);
+            drawOneTile(g2, gp.maxWorldCol, worldRow, tile[17]);
+        }
+        drawOneTile(g2, -1, -1, tile[22]);
+        drawOneTile(g2, gp.maxWorldCol, -1, tile[23]);
+        drawOneTile(g2, -1, gp.maxWorldRow, tile[24]);
+        drawOneTile(g2, gp.maxWorldCol, gp.maxWorldRow, tile[25]);
+
     }
 
     public void drawOneTile(Graphics2D g2, int worldCol, int worldRow, Tile tile) {
