@@ -27,36 +27,53 @@ public class CollisionChecker {
 
         switch (entity.direction) {
             case "up" :
-            entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+
+                if ((entityTopWorldY - entity.speed) < 0)
                     entity.collisionOn = true;
+                else {
+                    tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+                    if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
+                        entity.collisionOn = true;
+                    }
                 }
                 break;
             case "down":
-            entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
-            tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-            tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-            if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
-                entity.collisionOn = true;
-            }
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+                if (entityBottomRow >= gp.maxWorldRow)
+                    entity.collisionOn = true;
+                else {
+                    tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+                    tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+                    if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
+                        entity.collisionOn = true;
+                    }
+                }
                 break;
             case "left":
-            entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-            tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
-            tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
-            if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
-                entity.collisionOn = true;
-            }
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+                if ((entityLeftWorldX - entity.speed) < 0)
+                    entity.collisionOn = true;
+                else {
+                    tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
+                    if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
+                        entity.collisionOn = true;
+                    }
+                }
                 break;
             case "right":
-            entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-            tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
-            tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
-            if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
-                entity.collisionOn = true;
-            }
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+                if (entityRightCol >= gp.maxWorldCol)
+                    entity.collisionOn = true;
+                else {
+                    tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
+                    if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true){
+                        entity.collisionOn = true;
+                    }
+                }
                 break;       
         }
 

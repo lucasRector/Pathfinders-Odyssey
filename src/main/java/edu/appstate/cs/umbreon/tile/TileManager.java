@@ -134,29 +134,58 @@ public class TileManager {
     public void draw(Graphics2D g2) {
         int worldCol = 0;
         int worldRow = 0;
+        int margin = 24;
 
         // Iterate through each tile in the map
+
         while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
             int tileNum = mapTileNum[worldCol][worldRow]; // Get tile number
-            int worldX = worldCol * gp.tileSize; // Calculate world X position
-            int worldY = worldRow * gp.tileSize; // Calculate world Y position
-            int screenX = worldX - gp.player.worldX + gp.player.screenX; // Calculate screen X position
-            int screenY = worldY - gp.player.worldY + gp.player.screenY; // Calculate screen Y position
+            drawOneTile(g2, worldCol, worldRow, tile[tileNum]);
 
-            // Check if tile is within the player's view
-            if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
-                    && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
-                    && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
-                    && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-
-                // Draw the tile on the screen
-                g2.drawImage(tile[tileNum].image, screenX, screenY, null);
-            }
             worldCol++;
             if (worldCol == gp.maxWorldCol) {
                 worldCol = 0;
                 worldRow++;
             }
         }
+        for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
+            for (worldRow = -margin; worldRow < 0; worldRow++) {
+                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            }
+        }
+        for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
+            for (worldRow = gp.maxWorldRow; worldRow < gp.maxWorldRow + margin; worldRow++) {
+                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            }
+        }
+        for (worldCol = -margin; worldCol < 0; worldCol++) {
+            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            }
+        }
+        for (worldCol = gp.maxWorldRow; worldCol < gp.maxWorldRow + margin; worldCol++) {
+            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
+                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            }
+        }
+    }
+
+    public void drawOneTile(Graphics2D g2, int worldCol, int worldRow, Tile tile) {
+
+        int worldX = worldCol * gp.tileSize; // Calculate world X position
+        int worldY = worldRow * gp.tileSize; // Calculate world Y position
+        int screenX = worldX - gp.player.worldX + gp.player.screenX; // Calculate screen X position
+        int screenY = worldY - gp.player.worldY + gp.player.screenY; // Calculate screen Y position
+
+        //g2.drawImage(tile.image, screenX, screenY, null);
+        if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
+                && worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
+                && worldY + gp.tileSize > gp.player.worldY - gp.player.screenY
+                && worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+//
+            // Draw the tile on the screen
+            g2.drawImage(tile.image, screenX, screenY, null);
+        }
+
     }
 }
