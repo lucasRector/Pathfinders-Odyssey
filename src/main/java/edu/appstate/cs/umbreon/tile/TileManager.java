@@ -125,7 +125,6 @@ public class TileManager {
      */
     public void loadMap(String filePath) {
         mg.generate(mapTileNum);
-  
         }
     
 
