@@ -249,6 +249,6 @@ public class UI {
         }
 
         // button to go back to the title screen
-        g2.drawString("Press Enter to return to title screen", x, y + 40);
+        g2.drawString("Press Escape to return to title screen", x, y + 40);
     }
 }

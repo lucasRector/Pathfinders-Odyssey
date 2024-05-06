@@ -40,9 +40,9 @@ public class KeyHandler implements KeyListener {
 
         // ran into a bug where you cannot return to the title screen
         // if (instructionsScreenDisplayed && code != KeyEvent.VK_ENTER) {
-        //    return;
-        // } 
-        if (instructionsScreenDisplayed && code == KeyEvent.VK_ENTER) {
+        // return;
+        // }
+        if (instructionsScreenDisplayed && code == KeyEvent.VK_ESCAPE) {
             gp.ui.showInstructions = false;
             instructionsScreenDisplayed = false;
         }
@@ -135,7 +135,6 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
 
-        
         if (gp.gameState == gp.titleState) {
             if (gp.ui.showInstructions && code == KeyEvent.VK_ENTER) {
                 gp.ui.showInstructions = false;
@@ -154,7 +153,7 @@ public class KeyHandler implements KeyListener {
             }
         }
 
-        // This stops the user from navigating the title screen by accident 
+        // This stops the user from navigating the title screen by accident
         // while reading the instuctions
         if (gp.gameState == gp.titleState) {
             if (gp.keyH.upPressed == true || gp.keyH.downPressed == true) {

@@ -1,6 +1,5 @@
 package edu.appstate.cs.umbreon.entity;
 
-
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -8,8 +7,6 @@ import java.awt.image.BufferedImage;
 import edu.appstate.cs.umbreon.main.GamePanel;
 import edu.appstate.cs.umbreon.main.KeyHandler;
 import edu.appstate.cs.umbreon.main.Main;
-
-
 
 // import src.main.GamePanel;
 // import src.main.KeyHandler;
@@ -21,73 +18,67 @@ public class Player extends Entity {
     public final int screenY;
     public int hasKey = 0;
 
-
-
-    public Player(GamePanel gp, KeyHandler keyH){
+    public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
 
-        screenX = gp.screenWidth/2 - (gp.tileSize/2);
-        screenY = gp.screenHeight/2 - (gp.tileSize/2);
+        screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
+        screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
 
         solidArea = new Rectangle(8, 14, 30, 30);
         solidArea.x = 8;
         solidArea.y = 14;
         solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY =solidArea.y;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 30;
         solidArea.height = 30;
 
-        setDefaultValues(); 
+        setDefaultValues();
         getPlayerImage();
 
     }
 
-    public void setDefaultValues(){
-        worldX = (gp.worldWidth/2) ; 
-        worldY =  gp.worldHeight/2;
+    public void setDefaultValues() {
+        worldX = (gp.worldWidth / 2);
+        worldY = gp.worldHeight / 2;
         speed = 7;
         direction = "down";
     }
 
-    public void getPlayerImage(){
-      
-            up1 = setup(Main.BUILDDIR + "player/boyup1");
-            
-            up2 = setup(Main.BUILDDIR + "player/boyup2");
+    public void getPlayerImage() {
 
-            down1 = setup(Main.BUILDDIR + "player/boydown1");
+        up1 = setup(Main.BUILDDIR + "player/boyup1");
 
-            down2 = setup(Main.BUILDDIR + "player/boydown2");
+        up2 = setup(Main.BUILDDIR + "player/boyup2");
 
-            left1 = setup(Main.BUILDDIR + "player/boyleft1");
+        down1 = setup(Main.BUILDDIR + "player/boydown1");
 
-            left2 = setup(Main.BUILDDIR + "player/boyleft2");
+        down2 = setup(Main.BUILDDIR + "player/boydown2");
 
-            right1 = setup(Main.BUILDDIR + "player/boyright1");
+        left1 = setup(Main.BUILDDIR + "player/boyleft1");
 
-            right2 = setup(Main.BUILDDIR + "player/boyright2");
+        left2 = setup(Main.BUILDDIR + "player/boyleft2");
+
+        right1 = setup(Main.BUILDDIR + "player/boyright1");
+
+        right2 = setup(Main.BUILDDIR + "player/boyright2");
     }
 
-
-
-    public void update(){
-        if(keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true){
-            if(keyH.upPressed == true){
+    public void update() {
+        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true
+                || keyH.rightPressed == true) {
+            if (keyH.upPressed == true) {
                 direction = "up";
-                
-            }
-            else if(keyH.downPressed == true){
-               direction = "down";
-               
-            }
-            else if(keyH.leftPressed == true){
+
+            } else if (keyH.downPressed == true) {
+                direction = "down";
+
+            } else if (keyH.leftPressed == true) {
                 direction = "left";
-                
-            }
-            else if(keyH.rightPressed == true){
+
+            } else if (keyH.rightPressed == true) {
                 direction = "right";
-                
+
             }
 
             collisionOn = false;
@@ -98,44 +89,42 @@ public class Player extends Entity {
 
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
-            if(collisionOn == false){
+            if (collisionOn == false) {
                 switch (direction) {
                     case "up":
-                    worldY -= speed;    
+                        worldY -= speed;
                         break;
-                
+
                     case "down":
-                    worldY += speed;
+                        worldY += speed;
                         break;
 
                     case "left":
-                    worldX -= speed;
+                        worldX -= speed;
                         break;
 
                     case "right":
-                    worldX += speed;
+                        worldX += speed;
                         break;
 
                 }
             }
 
             spriteCounter++;
-            if(spriteCounter > 12){
-                if(spriteNum == 1){
+            if (spriteCounter > 12) {
+                if (spriteNum == 1) {
                     spriteNum = 2;
-                }
-                else if(spriteNum == 2){
+                } else if (spriteNum == 2) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
-        }
+            }
 
-            
         }
     }
 
-    public void pickupObject(int i){
-        if(i != 999){
+    public void pickupObject(int i) {
+        if (i != 999) {
 
             String objectName = gp.obj[i].name;
 
@@ -147,45 +136,43 @@ public class Player extends Entity {
                     gp.ui.showMessage("You got a key:)");
                     break;
                 case "Door":
-                    if(hasKey == 10){
+                    if (hasKey == 10) {
                         gp.playSE(3);
                         gp.obj[i] = null;
                         hasKey--;
                         gp.ui.showMessage("You opened the door");
-                    }
-                    else{
-                        if(gp.player.hasKey == 1){
+                    } else {
+                        if (gp.player.hasKey == 1) {
                             gp.ui.showMessage("You need " + keyMath() + " more key:(");
-                        }else
-                        gp.ui.showMessage("You need " + keyMath() +  " more keys:(");
+                        } else
+                            gp.ui.showMessage("You need " + keyMath() + " more keys:(");
 
                     }
                     break;
                 case "Boots":
-                gp.ui.showMessage("Speed Up!!!");
+                    gp.ui.showMessage("Speed Up!!!");
                     gp.playSE(2);
                     speed += 2;
                     gp.obj[i] = null;
-                        break;
+                    break;
                 case "Chest":
                     gp.ui.gameFinished = true;
                     gp.stopMusic();
                     gp.playSE(4);
                     break;
-            
-               
+
             }
         }
     }
 
-    public int keyMath(){
-       return 10 - gp.player.hasKey;
+    public int keyMath() {
+        return 10 - gp.player.hasKey;
 
     }
 
-    public void interactNPC(int i){
-        if(i != 999){
-            if(gp.keyH.enterPressed == true){
+    public void interactNPC(int i) {
+        if (i != 999) {
+            if (gp.keyH.enterPressed == true) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
             }
@@ -194,46 +181,45 @@ public class Player extends Entity {
         gp.keyH.enterPressed = false;
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
-        switch(direction){
+        switch (direction) {
             case "up":
-            if(spriteNum == 1){
-                image = up1;
-            }
-            if(spriteNum == 2){
-                image = up2;
-            }
-            break;
+                if (spriteNum == 1) {
+                    image = up1;
+                }
+                if (spriteNum == 2) {
+                    image = up2;
+                }
+                break;
             case "down":
-            if(spriteNum == 1){
-                image = down1;
-            }
-            if(spriteNum == 2){
-                image = down2;
-            }
-            break;
+                if (spriteNum == 1) {
+                    image = down1;
+                }
+                if (spriteNum == 2) {
+                    image = down2;
+                }
+                break;
             case "left":
-            if(spriteNum == 1){
-                image = left1;
-            }
-            if(spriteNum == 2){
-                image = left2;
-            }
-            break;
+                if (spriteNum == 1) {
+                    image = left1;
+                }
+                if (spriteNum == 2) {
+                    image = left2;
+                }
+                break;
             case "right":
-            if(spriteNum == 1){
-                image = right1;
-            }
-            if(spriteNum == 2){
-                image = right2;
-            }
-            break;
+                if (spriteNum == 1) {
+                    image = right1;
+                }
+                if (spriteNum == 2) {
+                    image = right2;
+                }
+                break;
 
         }
         g2.drawImage(image, screenX, screenY, null);
     }
-
 
 }
