@@ -25,6 +25,9 @@ public class TileManager {
     public Tile[] tile; // Array to hold tile objects
     public int mapTileNum[][]; // Array to hold tile numbers for the map
     public HashMap<String, Integer> nameMap;
+
+    private int drawCounter;
+    private int alternator;
  
     /**
      * Constructor for TileManager class.
@@ -32,11 +35,11 @@ public class TileManager {
      * @param gp The GamePanel instance.
      */
     public TileManager(GamePanel gp) {
-        
         this.nameMap = new HashMap<String, Integer>();
         this.mg = new MapGen(gp);
         this.gp = gp;
         tile = new Tile[50]; // Initialize tile array with a size of 50
+        this.drawCounter = 0;
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow]; // Initialize mapTileNum array with dimensions from GamePanel
         getTileImage();
         loadMap(Main.BUILDDIR + "maps/worldV2.txt"); // Load map from file
@@ -85,7 +88,7 @@ public class TileManager {
         setup(38, "road12", false);
         setup(39, "earth", false);
         setup(40, "wall", true);
-        setup(41, "tree", true);
+        setup(41, "tree", true); // Should be true
         setup(42, "floor01", false);
         
     }
@@ -122,7 +125,6 @@ public class TileManager {
      */
     public void loadMap(String filePath) {
         mg.generate(mapTileNum);
-  
         }
     
 
@@ -135,6 +137,7 @@ public class TileManager {
         int worldCol = 0;
         int worldRow = 0;
         int margin = 24;
+        int waterChangeFrequency = 32;
 
         // Iterate through each tile in the map
 
@@ -148,25 +151,77 @@ public class TileManager {
                 worldRow++;
             }
         }
+
+        // Open water around Island
         for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
-            for (worldRow = -margin; worldRow < 0; worldRow++) {
-                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            for (worldRow = -margin; worldRow < -1; worldRow++) {
+                if ((worldCol + worldRow + alternator) % 2 == 0)
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[12]);
+                }
+                else
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[13]);
+                }
             }
         }
         for (worldCol = -margin; worldCol < gp.maxWorldCol + margin; worldCol++) {
-            for (worldRow = gp.maxWorldRow; worldRow < gp.maxWorldRow + margin; worldRow++) {
-                drawOneTile(g2, worldCol, worldRow, tile[12]);
+            for (worldRow = gp.maxWorldRow + 1; worldRow < gp.maxWorldRow + margin; worldRow++) {
+                if ((worldCol + worldRow + alternator) % 2 == 0)
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[12]);
+                }
+                else
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[13]);
+                }
             }
         }
-        for (worldCol = -margin; worldCol < 0; worldCol++) {
-            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
-                drawOneTile(g2, worldCol, worldRow, tile[12]);
+        for (worldCol = -margin; worldCol < -1; worldCol++) {
+            for (worldRow = -1; worldRow < gp.maxWorldRow + 1; worldRow++) {
+                if ((worldCol + worldRow + alternator) % 2 == 0)
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[12]);
+                }
+                else
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[13]);
+                }
             }
         }
-        for (worldCol = gp.maxWorldRow; worldCol < gp.maxWorldRow + margin; worldCol++) {
-            for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++) {
-                drawOneTile(g2, worldCol, worldRow, tile[12]);
+        for (worldCol = gp.maxWorldRow + 1; worldCol < gp.maxWorldRow + margin; worldCol++) {
+            for (worldRow = -1; worldRow < gp.maxWorldRow + 1; worldRow++) {
+                if ((worldCol + worldRow + alternator) % 2 == 0)
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[12]);
+                }
+                else
+                {
+                    drawOneTile(g2, worldCol, worldRow, tile[13]);
+                }
             }
+        }
+        // Edges of island
+        for (worldCol = 0; worldCol < gp.maxWorldCol; worldCol++)
+        {
+            drawOneTile(g2, worldCol, -1, tile[20]);
+            drawOneTile(g2, worldCol, gp.maxWorldRow, tile[15]);
+        }
+        for (worldRow = 0; worldRow < gp.maxWorldRow; worldRow++)
+        {
+            drawOneTile(g2, -1, worldRow, tile[18]);
+            drawOneTile(g2, gp.maxWorldCol, worldRow, tile[17]);
+        }
+        drawOneTile(g2, -1, -1, tile[22]);
+        drawOneTile(g2, gp.maxWorldCol, -1, tile[23]);
+        drawOneTile(g2, -1, gp.maxWorldRow, tile[24]);
+        drawOneTile(g2, gp.maxWorldCol, gp.maxWorldRow, tile[25]);
+        drawCounter += 1;
+        drawCounter = drawCounter % waterChangeFrequency;
+        if (drawCounter == 0)
+        {
+            alternator += 1;
+            alternator = alternator % 2;
         }
     }
 
