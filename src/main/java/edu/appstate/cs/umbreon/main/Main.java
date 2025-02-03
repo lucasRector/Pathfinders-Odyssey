@@ -13,7 +13,7 @@ public class Main {
      */
     public static String BUILDDIR = "./target/classes/";
 
-    public static void main(String[] dargs) {
+    public static void main(String[] args) { 
         // System.out.println("Other Dir: " + System.getProperty("outputDirectory"));
         // System.out.println("User dir: " + System.getProperty("user.dir"));
         // Create a new JFrame window
@@ -27,7 +27,7 @@ public class Main {
 
         // Create a new instance of GamePanel
         GamePanel gamePanel = new GamePanel();
-        // Add the game panel to the window
+        // Add the agame panel to the window
         window.add(gamePanel);
         // Pack the components in the window
         window.pack();
