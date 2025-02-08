@@ -1,4 +1,4 @@
-🌍 PathFinder's Odyssey
+**🌍 PathFinder's Odyssey
 🦊 A Journey Awaits
 🌙 Team Umbreon
 👥 Team Members
@@ -22,3 +22,4 @@ OUR PRODUCT: Delivers a rich, offline gameplay experience with engaging mechanic
 🛠️ Built for Adventure – Every playthrough offers new discoveries.
 
 This is just the beginning—the adventure is yours to shape!
+**
